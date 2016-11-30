@@ -1,0 +1,18 @@
+{
+  "name": "work",
+  "version": "1.0.0",
+  "description": "homework",
+  "main": "index.js",
+  "author": "yaosui",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "next"
+  },
+  "devDependencies": {
+    "eslint": "^3.11.1",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.1",
+    "eslint-plugin-react": "^6.7.1"
+  }
+}
