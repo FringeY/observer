@@ -215,6 +215,7 @@ window.onload = function () {
     console.log(data);
     sysInfo = data.data;
     var time = sysInfo.match(/top\s\-\s(\d+\:\d+\:\d+)/)[1];
+    Times.push(time);
     showTime(time);
     var uptime = sysInfo.match(/up\s(\d+\sdays,\s\d+\:\d+)/).slice(1);
     showUpTime(uptime);
