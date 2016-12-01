@@ -20,98 +20,95 @@ window.onload = function () {
   var cpuChart = echarts.init(document.getElementById('cpu-chart'));
   var cpuOption = {
     title: {
-        text: ''
+      text: ''
     },
     tooltip: {
-        trigger: 'axis',
-        formatter: function (params) {
-            params = params[0];
-            // var date = new Date(params.name);
-            return params;
-        },
-        axisPointer: {
-            animation: false
-        }
+      trigger: 'axis',
+      formatter: function (params) {
+        params = params[0];
+        // var date = new Date(params.name);
+        return params;
+      }
+    },
+    axisPointer: {
+      animation: false,
     },
     legend: {
         data:['us','sy','ni','id','wa','hi','si','st']
     },
-    xAxis : [
-        {
-            type : 'time',
-            boundaryGap : false,
-        }
-    ],
-    yAxis : [
-        {
-            type : 'value'
-        }
+    xAxis: {
+      data: date
+    },
+    yAxis: [
+      {
+        type : 'value'
+      }
     ],
     series : [
-        {
-            name:'us',
-            type:'line',
-            stack: '总量',
-            showSymbol: false,
-            hoverAnimation: false,
-            data: us
-        },
-        {
-            name:'sy',
-            type:'line',
-            stack: '总量',
-            showSymbol: false,
-            hoverAnimation: false,
-            data: sy
-        },
-        {
-            name:'ni',
-            type:'line',
-            stack: '总量',
-            showSymbol: false,
-            hoverAnimation: false,
-            data: ni
-        },
-        {
-            name:'id',
-            type:'line',
-            stack: '总量',
-            showSymbol: false,
-            hoverAnimation: false,
-            data: id
-        },
-        {
-            name:'wa',
-            type:'line',
-            stack: '总量',
-            showSymbol: false,
-            hoverAnimation: false,
-            data: wa
-        },
-        {
-            name:'hi',
-            type:'line',
-            stack: '总量',
-            showSymbol: false,
-            hoverAnimation: false,
-            data: hi
-        },
-        {
-            name:'si',
-            type:'line',
-            stack: '总量',
-            showSymbol: false,
-            hoverAnimation: false,
-            data: si
-        },
-        {
-            name:'st',
-            type:'line',
-            stack: '总量',
-            showSymbol: false,
-            hoverAnimation: false,
-            data: st
-        },
+      {
+        name:'us',
+        type:'line',
+        stack: '总量',
+        showSymbol: false,
+        hoverAnimation: false,
+        data: us
+      },
+      {
+        name:'sy',
+        type:'line',
+        stack: '总量',
+        showSymbol: false,
+        hoverAnimation: false,
+        data: sy
+      },
+      {
+        name:'ni',
+        type:'line',
+        stack: '总量',
+        showSymbol: false,
+        hoverAnimation: false,
+        data: ni
+      },
+      {
+        name:'id',
+        type:'line',
+        stack: '总量',
+        showSymbol: false,
+        hoverAnimation: false,
+        data: id
+      },
+      {
+        name:'wa',
+        type:'line',
+        stack: '总量',
+        showSymbol: false,
+        hoverAnimation: false,
+        data: wa
+      },
+      {
+        name:'hi',
+        type:'line',
+        stack: '总量',
+        showSymbol: false,
+        hoverAnimation: false,
+        data: hi
+      },
+      {
+        name:'si',
+        type:'line',
+        stack: '总量',
+        showSymbol: false,
+        hoverAnimation: false,
+        data: si
+      },
+      {
+        name:'st',
+        type:'line',
+        stack: '总量',
+        showSymbol: false,
+        hoverAnimation: false,
+        data: st
+      },
     ]
   };
   cpuChart.setOption(cpuOption);
