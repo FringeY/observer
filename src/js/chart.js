@@ -158,7 +158,7 @@ window.onload = function () {
     ],
     series: [
       {
-        name: 'cachedMem',
+        name: 'CachedMems',
         type: 'line',
         smooth: true,
         showSymbol: false,
@@ -169,26 +169,26 @@ window.onload = function () {
   }
 
   function parseCpu(data) {
-    us.push(data[0]);
-    sy.push(data[1]);
-    ni.push(data[2]);
-    id.push(data[3]);
-    wa.push(data[4]);
-    hi.push(data[5]);
-    si.push(data[6]);
-    st.push(data[7]);
+    us.push(data[0] * 1);
+    sy.push(data[1] * 1);
+    ni.push(data[2] * 1);
+    id.push(data[3] * 1);
+    wa.push(data[4] * 1);
+    hi.push(data[5] * 1);
+    si.push(data[6] * 1);
+    st.push(data[7] * 1);
     cpuChart.setOption(cpuOption);
   }
 
   function parseMem(data) {
-    used.push(data[1]);
-    free.push(data[2]);
-    buffers.push(data[3]);
+    used.push(data[1] * 1);
+    free.push(data[2] * 1);
+    buffers.push(data[3] * 1);
     memChart.setOption(memOption);
   }
 
   function parseCache(data) {
-    CachedMems.push(data);
+    CachedMems.push(data * 1);
     cacheChart.setOption(cacheOption);
   }
 
@@ -209,7 +209,7 @@ window.onload = function () {
     parseMem(mem);
     // var swap = sysInfo.match(/KiB\sSwap\:\s+(\d+)\stotal,\s+(\d+)\sused,\s+(\d+)\sfree/).slice(1);
     // Swaps.push(swap);
-    cachedMem = sysInfo.match(/(\d+)\scached\sMem/).slice(1);
+    cachedMem = sysInfo.match(/(\d+)\scached\sMem/)[1];
     parseCache(cachedMem);
 
     setTimeout(function () {
