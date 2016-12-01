@@ -114,6 +114,7 @@ window.onload = function () {
         },
     ]
   };
+  cpuChart.setOption(cpuOption);
 
   function parseCpu(data) {
     us.push(data[0]);
