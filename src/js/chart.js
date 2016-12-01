@@ -42,7 +42,7 @@ window.onload = function () {
     yAxis: [
       {
         type : 'value',
-        boundaryGap: [0, 1],
+        boundaryGap: [0, 100],
       }
     ],
     series : [
