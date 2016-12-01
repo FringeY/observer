@@ -4,13 +4,14 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: #E8F1F5;
 }
 
 .left,
 .right {
   box-sizing: border-box;
   float: left;
-  padding: 20px;
+  padding: 20px 40px;
   width: 50%;
 }
 
@@ -22,6 +23,7 @@ body {
   list-style: none;
   border: 1px solid #e3e3e3;
   border-top: none;
+  background-color: #FFFFFF;
 }
 
 .left ul li h3 {
