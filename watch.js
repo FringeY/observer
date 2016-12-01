@@ -11,8 +11,8 @@ const top = exec('top -b -d 1', {});
 
 top.stdout.on('data', function (data) {
   const sysinfo = data.split('\n');
-  console.log(sysinfo);
-  client.set('sysinfo', sysinfo.slice(0, 7).join(''));
+  console.log(sysinfo.slice(0, 7).join(''));
+  client.set('sysinfo', data);
 });
 
 top.stderr.on('data', function (data) {
