@@ -6,7 +6,8 @@
   "author": "yaosui",
   "license": "MIT",
   "dependencies": {
-    "koa": "next"
+    "koa": "next",
+    "redis": "^2.6.3"
   },
   "devDependencies": {
     "eslint": "^3.11.1",
