@@ -220,13 +220,13 @@ window.onload = function () {
     showUpTime(uptime);
     var loadaverage = sysInfo.match(/load\saverage\:\s(\d+\.\d+),\s(\d+\.\d+),\s(\d+\.\d+)/).slice(1);
     showLoadAverage(loadaverage);
-    var tasks = sysInfo.match(/Tasks\:\s+(\d+)\stotal,\s+(\d+)\srunning,\s+(\d+)\ssleeping,\s+(\d+)\sstopped,\s+(\d+)\szombie/).slice(1)
+    var tasks = sysInfo.match(/Tasks\:\s*(\d+)\stotal,\s*(\d+)\srunning,\s*(\d+)\ssleeping,\s*(\d+)\sstopped,\s*(\d+)\szombie/).slice(1)
     showTasks(tasks);
-    var cpu = sysInfo.match(/Cpu\(s\):\s+(\d+\.\d+)\sus,\s+(\d+\.\d+)\ssy,\s+(\d+\.\d+)\sni,\s+(\d+\.\d+)\sid,\s+(\d+\.\d+)\swa,\s+(\d+\.\d+)\shi,\s+(\d+\.\d+)\ssi,\s+(\d+\.\d+)\sst/).slice(1);
+    var cpu = sysInfo.match(/Cpu\(s\):\s*(\d+\.\d+)\sus,\s*(\d+\.\d+)\ssy,\s*(\d+\.\d+)\sni,\s*(\d+\.\d+)\sid,\s*(\d+\.\d+)\swa,\s*(\d+\.\d+)\shi,\s*(\d+\.\d+)\ssi,\s*(\d+\.\d+)\sst/).slice(1);
     parseCpu(cpu);
-    var mem = sysInfo.match(/KiB\sMem\:\s+(\d+)\stotal,\s+(\d+)\sused,\s+(\d+)\sfree,\s+(\d+)\sbuffers/).slice(1);
+    var mem = sysInfo.match(/KiB\sMem\:\s*(\d+)\stotal,\s*(\d+)\sused,\s*(\d+)\sfree,\s*(\d+)\sbuffers/).slice(1);
     parseMem(mem);
-    // var swap = sysInfo.match(/KiB\sSwap\:\s+(\d+)\stotal,\s+(\d+)\sused,\s+(\d+)\sfree/).slice(1);
+    // var swap = sysInfo.match(/KiB\sSwap\:\s*(\d+)\stotal,\s*(\d+)\sused,\s*(\d+)\sfree/).slice(1);
     // Swaps.push(swap);
     cachedMem = sysInfo.match(/(\d+)\scached\sMem/)[1];
     parseCache(cachedMem);
