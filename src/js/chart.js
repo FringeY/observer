@@ -24,13 +24,13 @@ window.onload = function () {
         data:['us','sy','ni','id','wa','hi','si','st']
     },
     xAxis: {
-      data: Times
+      data: Times,
+      boundaryGap: false
     },
-    yAxis: [
-      {
-        type : 'value'
-      }
-    ],
+    yAxis: {
+      name: '%',
+      type: 'value'
+    },
     series: [
       {
         name: 'us',
@@ -112,11 +112,10 @@ window.onload = function () {
     xAxis: {
       data: Times
     },
-    yAxis: [
-      {
-        type: 'value'
-      }
-    ],
+    yAxis: {
+      name: 'MiB',
+      type: 'value'
+    },
     series: [
       {
         name: 'used',
@@ -151,11 +150,10 @@ window.onload = function () {
     xAxis: {
       data: Times
     },
-    yAxis: [
-      {
-        type: 'value'
-      }
-    ],
+    yAxis: {
+      name: 'MiB',
+      type: 'value'
+    },
     series: [
       {
         name: 'CachedMems',
@@ -181,14 +179,14 @@ window.onload = function () {
   }
 
   function parseMem(data) {
-    used.push(data[1] * 1);
-    free.push(data[2] * 1);
+    used.push(data[1] * 1 / 1024);
+    free.push(data[2] * 1 / 1024);
     buffers.push(data[3] * 1);
     memChart.setOption(memOption);
   }
 
   function parseCache(data) {
-    CachedMems.push(data * 1);
+    CachedMems.push(data * 1 / 1024);
     cacheChart.setOption(cacheOption);
   }
 
