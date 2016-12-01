@@ -37,7 +37,7 @@ window.onload = function () {
         data:['us','sy','ni','id','wa','hi','si','st']
     },
     xAxis: {
-      data: date
+      data: Times
     },
     yAxis: [
       {
