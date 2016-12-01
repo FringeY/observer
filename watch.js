@@ -7,11 +7,9 @@ client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-const top = exec('top -b -d 1', {});
+const top = exec('top -bn 1', {});
 
 top.stdout.on('data', function (data) {
-  // const sysinfo = data.split('\n');
-  // console.log(sysinfo.slice(0, 7).join(''));
   client.set('sysinfo', data);
 });
 

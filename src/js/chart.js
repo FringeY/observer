@@ -234,7 +234,7 @@ window.onload = function () {
 
     setTimeout(function () {
       getSysInfo();
-    }, 1000);
+    }, 5000);
   });
 
   function getSysInfo() {

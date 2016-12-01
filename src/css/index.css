@@ -36,6 +36,10 @@ body {
   border-bottom: 1px solid #e3e3e3;
 }
 
+.left ul li h3 span {
+  font-size: 12px;
+}
+
 .left ul li:nth-child(2) h3{
   border-bottom: none;
 } 
@@ -48,7 +52,6 @@ body {
 
 #status {
   color: #00B8A9;
-  font-size: 12px;
 }
 
 #loadaverage {
