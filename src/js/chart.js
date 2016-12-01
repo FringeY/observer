@@ -117,6 +117,7 @@ window.onload = function () {
   cpuChart.setOption(cpuOption);
 
   function parseCpu(data) {
+    console.log(data);
     us.push(data[0]);
     sy.push(data[1]);
     ni.push(data[2]);
@@ -183,8 +184,4 @@ window.onload = function () {
   function getSysInfo() {
     socket.emit('getSysInfo', { my: 'data' });    
   }
-
-  setTimeout(function () {
-    getSysInfo();
-  }, 5000);
 }
