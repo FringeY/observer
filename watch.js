@@ -10,8 +10,8 @@ client.on("error", function (err) {
 const top = exec('top -b -d 1', {});
 
 top.stdout.on('data', function (data) {
-  const sysinfo = data.split('\n');
-  console.log(sysinfo.slice(0, 7).join(''));
+  // const sysinfo = data.split('\n');
+  // console.log(sysinfo.slice(0, 7).join(''));
   client.set('sysinfo', data);
 });
 
