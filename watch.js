@@ -7,17 +7,11 @@ client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-const top = exec('top -b -p 1 -d 1', {});
+const top = exec('top -b -d 1', {});
 
 top.stdout.on('data', function (data) {
-  client.set('sysinfo', data);
-  client.get('sysinfo', function (err, reply) {
-    if (err !== null) {
-      console.log(err);
-    } else {
-      console.log(reply.toString());
-    }
-  });
+  var sysinfo = data.split('\n');
+  client.set('sysinfo', data.slice(0, 5).join(''));
 });
 
 top.stderr.on('data', function (data) {
