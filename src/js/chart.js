@@ -193,11 +193,11 @@ window.onload = function () {
   }
 
   function showTime(data) {
-    document.getElementById('time').innerHTML = data;
+    document.getElementById('time').getElementsByTagName('span')[0].innerHTML = data;
   }
 
   function showUpTime(data) {
-    document.getElementById('uptime').innerHTML = data;
+    document.getElementById('uptime').getElementsByTagName('span')[0].innerHTML = data;
   }
 
   function showLoadAverage(data) {
@@ -205,10 +205,10 @@ window.onload = function () {
   }
 
   function showTasks(data) {
-    document.getElementById('run').innerHTML = data[0];
-    document.getElementById('sleep').innerHTML = data[1];
-    document.getElementById('stop').innerHTML = data[2];
-    document.getElementById('zombie').innerHTML = data[3];
+    document.getElementById('run').getElementsByTagName('span')[0].innerHTML = data[0];
+    document.getElementById('sleep').getElementsByTagName('span')[0].innerHTML = data[1];
+    document.getElementById('stop').getElementsByTagName('span')[0].innerHTML = data[2];
+    document.getElementById('zombie').getElementsByTagName('span')[0].innerHTML = data[3];
   }
 
   socket.on('sysInfo', function (data) {
@@ -233,7 +233,7 @@ window.onload = function () {
 
     setTimeout(function () {
       getSysInfo();
-    }, 5000);
+    }, 1000);
   });
 
   function getSysInfo() {

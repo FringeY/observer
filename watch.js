@@ -7,7 +7,7 @@ client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-const top = exec('top | head -5', {});
+const top = exec('top | head -1', {});
 
 top.stdout.on('data', function (data) {
   client.set('sysinfo', data);
