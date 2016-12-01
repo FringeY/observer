@@ -6,8 +6,9 @@ window.onload = function () {
       LoadAverage,
       Tasks,
       Mems = [],
-      Swaps = [],
+    //   Swaps = [],
       CachedMems = [];
+
   // cpu chart
   var us = [],
       sy = [],
@@ -19,20 +20,6 @@ window.onload = function () {
       st = [];
   var cpuChart = echarts.init(document.getElementById('cpu-chart'));
   var cpuOption = {
-    title: {
-      text: ''
-    },
-    tooltip: {
-      trigger: 'axis',
-      formatter: function (params) {
-        params = params[0];
-        // var date = new Date(params.name);
-        return params;
-      }
-    },
-    axisPointer: {
-      animation: false,
-    },
     legend: {
         data:['us','sy','ni','id','wa','hi','si','st']
     },
@@ -44,74 +31,142 @@ window.onload = function () {
         type : 'value'
       }
     ],
-    series : [
+    series: [
       {
-        name:'us',
-        type:'line',
-        stack: '总量',
+        name: 'us',
+        type: 'line',
+        smooth: true,
         showSymbol: false,
         hoverAnimation: false,
         data: us
       },
       {
-        name:'sy',
-        type:'line',
-        stack: '总量',
+        name: 'sy',
+        type: 'line',
+        smooth: true,
         showSymbol: false,
         hoverAnimation: false,
         data: sy
       },
       {
-        name:'ni',
-        type:'line',
-        stack: '总量',
+        name: 'ni',
+        type: 'line',
+        smooth: true,
         showSymbol: false,
         hoverAnimation: false,
         data: ni
       },
       {
-        name:'id',
-        type:'line',
-        stack: '总量',
+        name: 'id',
+        type: 'line',
+        smooth: true,
         showSymbol: false,
         hoverAnimation: false,
         data: id
       },
       {
-        name:'wa',
-        type:'line',
-        stack: '总量',
+        name: 'wa',
+        type: 'line',
+        smooth: true,
         showSymbol: false,
         hoverAnimation: false,
         data: wa
       },
       {
-        name:'hi',
-        type:'line',
-        stack: '总量',
+        name: 'hi',
+        type: 'line',
+        smooth: true,
         showSymbol: false,
         hoverAnimation: false,
         data: hi
       },
       {
-        name:'si',
-        type:'line',
-        stack: '总量',
+        name: 'si',
+        type: 'line',
+        smooth: true,
         showSymbol: false,
         hoverAnimation: false,
         data: si
       },
       {
-        name:'st',
-        type:'line',
-        stack: '总量',
+        name: 'st',
+        type: 'line',
+        smooth: true,
         showSymbol: false,
         hoverAnimation: false,
         data: st
       },
     ]
   };
-  cpuChart.setOption(cpuOption);
+
+  // mem chart
+  var used = [],
+      free = [],
+      buffers = [];
+
+  var memChart = echarts.init(document.getElementById('mem-chart'));
+  var memOption = {
+    legend: {
+        data: ['used', 'free', 'buffers']
+    },
+    xAxis: {
+      data: Times
+    },
+    yAxis: [
+      {
+        type: 'value'
+      }
+    ],
+    series: [
+      {
+        name: 'used',
+        type: 'line',
+        smooth: true,
+        showSymbol: false,
+        hoverAnimation: false,
+        data: used
+      },
+      {
+        name: 'free',
+        type: 'line',
+        smooth: true,
+        showSymbol: false,
+        hoverAnimation: false,
+        data: free
+      },
+      {
+        name: 'buffers',
+        type: 'line',
+        smooth: true,
+        showSymbol: false,
+        hoverAnimation: false,
+        data: buffers
+      },
+    ]
+  };
+
+  // cache chart
+  var cacheChart = echarts.init(document.getElementById('cache-chart'));
+  var cacheOption = {
+    xAxis: {
+      data: Times
+    },
+    yAxis: [
+      {
+        type: 'value'
+      }
+    ],
+    series: [
+      {
+        name: 'cachedMem',
+        type: 'line',
+        smooth: true,
+        showSymbol: false,
+        hoverAnimation: false,
+        data: CachedMems
+      }
+    ]
+  }
 
   function parseCpu(data) {
     us.push(data[0]);
@@ -123,6 +178,18 @@ window.onload = function () {
     si.push(data[6]);
     st.push(data[7]);
     cpuChart.setOption(cpuOption);
+  }
+
+  function parseMem(data) {
+    used.push(data[1]);
+    free.push(data[2]);
+    buffers.push(data[3]);
+    memChart.setOption(memOption);
+  }
+
+  function parseCache(data) {
+    CachedMems.push(data);
+    cacheChart.setOption(cacheOption);
   }
 
   socket.on('sysInfo', function (data) {
@@ -140,10 +207,10 @@ window.onload = function () {
     parseCpu(cpu);
     var mem = sysInfo.match(/KiB\sMem\:\s+(\d+)\stotal,\s+(\d+)\sused,\s+(\d+)\sfree,\s+(\d+)\sbuffers/).slice(1);
     Mems.push(mem);
-    var swap = sysInfo.match(/KiB\sSwap\:\s+(\d+)\stotal,\s+(\d+)\sused,\s+(\d+)\sfree/).slice(1);
-    Swaps.push(swap);
+    // var swap = sysInfo.match(/KiB\sSwap\:\s+(\d+)\stotal,\s+(\d+)\sused,\s+(\d+)\sfree/).slice(1);
+    // Swaps.push(swap);
     cachedMem = sysInfo.match(/(\d+)\scached\sMem/).slice(1);
-    CachedMems.push(cachedMem);
+    parseCache(cachedMem);
 
     setTimeout(function () {
       getSysInfo();
