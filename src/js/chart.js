@@ -193,22 +193,22 @@ window.onload = function () {
   }
 
   function showTime(data) {
-    document.getElementById('#time').innerHTML = data;
+    document.getElementById('time').innerHTML = data;
   }
 
   function showUpTime(data) {
-    document.getElementById('#uptime').innerHTML = data;
+    document.getElementById('uptime').innerHTML = data;
   }
 
   function showLoadAverage(data) {
-    document.getElementById('#loadaverage').innerHTML = data[0];
+    document.getElementById('loadaverage').innerHTML = data[0];
   }
 
   function showTasks(data) {
-    document.getElementById('#run').innerHTML = data[0];
-    document.getElementById('#sleep').innerHTML = data[1];
-    document.getElementById('#stop').innerHTML = data[2];
-    document.getElementById('#zombie').innerHTML = data[3];
+    document.getElementById('run').innerHTML = data[0];
+    document.getElementById('sleep').innerHTML = data[1];
+    document.getElementById('stop').innerHTML = data[2];
+    document.getElementById('zombie').innerHTML = data[3];
   }
 
   socket.on('sysInfo', function (data) {
