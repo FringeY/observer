@@ -7,7 +7,9 @@ body {
   width: 50%;
 }
 
-#cpu-chart {
+#cpu-chart,
+#mem-chart,
+#cache-chart {
   width: 100%;
   height: 200px;
 }
