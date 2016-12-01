@@ -117,7 +117,6 @@ window.onload = function () {
   cpuChart.setOption(cpuOption);
 
   function parseCpu(data) {
-    console.log(data);
     us.push(data[0]);
     sy.push(data[1]);
     ni.push(data[2]);
@@ -126,34 +125,7 @@ window.onload = function () {
     hi.push(data[5]);
     si.push(data[6]);
     st.push(data[7]);
-    cpuChart.setOption({
-      series : [
-          {
-              data: us
-          },
-          {
-              data: sy
-          },
-          {
-              data: ni
-          },
-          {
-              data: id
-          },
-          {
-              data: wa
-          },
-          {
-              data: hi
-          },
-          {
-              data: si
-          },
-          {
-              data: st
-          },
-      ] 
-    });
+    cpuChart.setOption(cpuOption);
   }
 
   socket.on('sysInfo', function (data) {
