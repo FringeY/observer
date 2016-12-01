@@ -41,8 +41,7 @@ window.onload = function () {
     },
     yAxis: [
       {
-        type : 'value',
-        boundaryGap: [0, 100],
+        type : 'value'
       }
     ],
     series : [
