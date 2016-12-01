@@ -158,7 +158,7 @@ window.onload = function () {
     console.log(data);
     sysInfo = data.data;
     var time = sysInfo.match(/top\s\-\s(\d+\:\d+\:\d+)/)[1];
-    Times.push(nowTime);
+    Times.push(time);
     var uptime = sysInfo.match(/up\s(\d+)\sdays,\s(\d+\:\d+)/).slice(1);
     Uptime = uptime;
     var loadaverage = sysInfo.match(/load\saverage\:\s(\d+\.\d+),\s(\d+\.\d+),\s(\d+\.\d+)/).slice(1);
