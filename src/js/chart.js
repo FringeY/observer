@@ -181,7 +181,7 @@ window.onload = function () {
   function parseMem(data) {
     used.push(data[1] * 1 / 1024);
     free.push(data[2] * 1 / 1024);
-    buffers.push(data[3] * 1);
+    buffers.push(data[3] * 1 / 1024);
     memChart.setOption(memOption);
   }
 
