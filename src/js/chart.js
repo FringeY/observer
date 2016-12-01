@@ -110,7 +110,8 @@ window.onload = function () {
         data: ['used', 'free', 'buffers']
     },
     xAxis: {
-      data: Times
+      data: Times,
+      boundaryGap: false
     },
     yAxis: {
       name: 'MiB',
@@ -148,7 +149,8 @@ window.onload = function () {
   var cacheChart = echarts.init(document.getElementById('cache-chart'));
   var cacheOption = {
     xAxis: {
-      data: Times
+      data: Times,
+      boundaryGap: false
     },
     yAxis: {
       name: 'MiB',
