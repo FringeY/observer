@@ -31,22 +31,22 @@ app.use(async function (ctx, next) {
 
 const io = require('socket.io').listen(app.listen(3000));
 
-// io.on('connection', function (socket) {
-//   client.get('sysinfo', function (err, reply) {
-//     if (err !== null) {
-//       console.log(err);
-//     } else {
-//       socket.emit('sysInfo', { data: reply.toString() });
-//     }
-//   });
+io.on('connection', function (socket) {
+  client.get('sysinfo', function (err, reply) {
+    if (err !== null) {
+      console.log(err);
+    } else {
+      socket.emit('sysInfo', { data: reply.toString() });
+    }
+  });
   
-//   socket.on('getSysInfo', function (data) {
-//     client.get('sysinfo', function (err, reply) {
-//       if (err !== null) {
-//         console.log(err);
-//       } else {
-//         socket.emit('sysInfo', { data: reply.toString() });
-//       }
-//     });
-//   });
-// });
+  socket.on('getSysInfo', function (data) {
+    client.get('sysinfo', function (err, reply) {
+      if (err !== null) {
+        console.log(err);
+      } else {
+        socket.emit('sysInfo', { data: reply.toString() });
+      }
+    });
+  });
+});
