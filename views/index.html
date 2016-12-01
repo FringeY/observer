@@ -3,27 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
-  <p>ok</p>
+  <ul class="left">
+    <li><h3>Status</h3></li>
+    <li><h3>CPU load average</h3></li>
+    <li><h3>Uptime</h3></li>
+    <li>
+      <h3>CPU</h3>
+      <div id="cpu-chart"></div>
+    </li>
+  </ul>
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-  <script>
-    var socket = io('http://localhost:3000');
-    var sysInfo, loadaverage, tasks, cpu, mem;
-    socket.on('sysInfo', function (data) {
-      console.log(data);
-      sysInfo = data.data;
-      loadaverage = sysInfo.match(/load\saverage\:\s(\d+\.\d+),\s(\d+\.\d+),\s(\d+\.\d+)/).slice(1);
-      tasks = sysInfo.match(/Tasks\:\s+(\d+)\stotal,\s+(\d+)\srunning,\s+(\d+)\ssleeping,\s+(\d+)\sstopped,\s+(\d+)\szombie/).slice(1)
-      cpu = sysInfo.match(/Cpu\(s\):\s+(\d+\.\d+)\sus,\s+(\d+\.\d+)\ssy,\s+(\d+\.\d+)\sni,\s+(\d+\.\d+)\sid,\s+(\d+\.\d+)\swa,\s+(\d+\.\d+)\shi,\s+(\d+\.\d+)\ssi,\s+(\d+\.\d+)\sst/).slice(1);
-      mem = sysInfo.match(/KiB\sMem\:\s+(\d+)\stotal,\s+(\d+)\sused,\s+(\d+)\sfree,\s+(\d+)\sbuffers/).slice(1);
-      swap = sysInfo.match(/KiB\sSwap\:\s+(\d+)\stotal,\s+(\d+)\sused,\s+(\d+)\sfree/).slice(1);
-      cachedMem = sysInfo.match(/(\d+)\scached\sMem/).slice(1);
-      document.write(loadaverage);
-    });
-    setTimeout(function () {
-      socket.emit('getSysInfo', { my: 'data' });
-    }, 5000);
-  </script>
+  <script src="js/echarts.min.js"></script>
+  <script src="js/chart.js"></script>
+  <!--<script>
+    
+  </script>-->
 </body>
 </html>
