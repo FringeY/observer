@@ -6,26 +6,43 @@
   <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
-  <ul class="left">
-    <li><h3>Status</h3></li>
-    <li><h3>CPU load average</h3></li>
-    <li><h3>Uptime</h3></li>
-    <li>
-      <h3>CPU</h3>
-      <div id="cpu-chart"></div>
-    </li>
-    <li>
-      <h3>Mem</h3>
-      <div id="mem-chart"></div>
-    </li>
-    <li>
-      <h3>CachedMem</h3>
-      <div id="cache-chart"></div>
-    </li>
-  </ul>
-  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <div class="left">
+    <ul>
+      <li>
+        <h3>Status: <span id="status">online</span></h3>
+        <div id="uptime">uptime: <span>0</span></div>
+        <div id="time">time: <span>0</span></div>
+      </li>
+      <li>
+        <h3>CPU load average: <span id="loadaverage">1</span></h3>
+      </li>
+      <li>
+        <h3>CPU:</h3>
+        <div id="cpu-chart"></div>
+      </li>
+      <li>
+        <h3>Mem:</h3>
+        <div id="mem-chart"></div>
+      </li>
+      <li>
+        <h3>CachedMem:</h3>
+        <div id="cache-chart"></div>
+      </li>
+      <li>
+        <h3>Tasks:</h3>
+        <div id="run">run: <span>1</span></div>
+        <div id="sleep">sleep: <span>1</span></div>
+        <div id="stop">stop: <span>1</span></div>
+        <div id="zombie">zombie: <span>1</span></div>
+      </li>
+    </ul>
+  </div>
+  <div class="right">
+    
+  </div>
+  <!--<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/echarts/3.3.1/echarts.min.js"></script>
-  <script src="js/chart.js"></script>
+  <script src="js/chart.js"></script>-->
   <!--<script>
     
   </script>-->

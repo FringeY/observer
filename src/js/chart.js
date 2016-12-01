@@ -1,10 +1,10 @@
 window.onload = function () {
   var socket = io('http://localhost:3000');
   var sysInfo,
-      Uptime = [],
+    //   Uptime = [],
       Times = [],
-      LoadAverage,
-      Tasks,
+    //   LoadAverage,
+    //   Tasks,
       Mems = [],
     //   Swaps = [],
       CachedMems = [];
@@ -192,17 +192,36 @@ window.onload = function () {
     cacheChart.setOption(cacheOption);
   }
 
+  function showTime(data) {
+    document.getElementById('#time').innerHTML = data;
+  }
+
+  function showUpTime(data) {
+    document.getElementById('#uptime').innerHTML = data;
+  }
+
+  function showLoadAverage(data) {
+    document.getElementById('#loadaverage').innerHTML = data[0];
+  }
+
+  function showTasks(data) {
+    document.getElementById('#run').innerHTML = data[0];
+    document.getElementById('#sleep').innerHTML = data[1];
+    document.getElementById('#stop').innerHTML = data[2];
+    document.getElementById('#zombie').innerHTML = data[3];
+  }
+
   socket.on('sysInfo', function (data) {
     console.log(data);
     sysInfo = data.data;
     var time = sysInfo.match(/top\s\-\s(\d+\:\d+\:\d+)/)[1];
-    Times.push(time);
-    var uptime = sysInfo.match(/up\s(\d+)\sdays,\s(\d+\:\d+)/).slice(1);
-    Uptime = uptime;
+    showTime(time);
+    var uptime = sysInfo.match(/up\s(\d+\sdays,\s\d+\:\d+)/).slice(1);
+    showUpTime(uptime);
     var loadaverage = sysInfo.match(/load\saverage\:\s(\d+\.\d+),\s(\d+\.\d+),\s(\d+\.\d+)/).slice(1);
-    LoadAverage = loadaverage;
+    showLoadAverage(loadaverage);
     var tasks = sysInfo.match(/Tasks\:\s+(\d+)\stotal,\s+(\d+)\srunning,\s+(\d+)\ssleeping,\s+(\d+)\sstopped,\s+(\d+)\szombie/).slice(1)
-    Tasks = tasks;
+    showTasks(tasks);
     var cpu = sysInfo.match(/Cpu\(s\):\s+(\d+\.\d+)\sus,\s+(\d+\.\d+)\ssy,\s+(\d+\.\d+)\sni,\s+(\d+\.\d+)\sid,\s+(\d+\.\d+)\swa,\s+(\d+\.\d+)\shi,\s+(\d+\.\d+)\ssi,\s+(\d+\.\d+)\sst/).slice(1);
     parseCpu(cpu);
     var mem = sysInfo.match(/KiB\sMem\:\s+(\d+)\stotal,\s+(\d+)\sused,\s+(\d+)\sfree,\s+(\d+)\sbuffers/).slice(1);
