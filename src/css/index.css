@@ -15,7 +15,8 @@ body {
   width: 50%;
 }
 
-.left ul {
+.left ul,
+.right ul {
   margin: 0;
   padding: 0;
   width: 100%;

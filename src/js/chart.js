@@ -211,9 +211,24 @@ window.onload = function () {
     document.getElementById('zombie').getElementsByTagName('span')[0].innerHTML = data[3];
   }
 
+  function parseOnline(users, count) {
+    var container = document.getElementById('online');
+    var str = '';
+    str += '<li>在线人数: ' + count + '</li>'; 
+    for (key in users) {
+      str += '<li>' + key + ':' + users[key] + '人</li>';
+    }
+    container.innerHTML = string;
+  }
+
   socket.on('sysInfo', function (data) {
     console.log(data);
     sysInfo = data.data;
+    var users = data.users && JSON.parse(data.users);
+    var count = data.count;
+    if (!sysInfo || !users || !count) {
+      return;
+    }
     var time = sysInfo.match(/top\s*\-\s*(\d+\:\d+\:\d+)/)[1];
     Times.push(time);
     showTime(time);
@@ -231,6 +246,8 @@ window.onload = function () {
     // Swaps.push(swap);
     cachedMem = sysInfo.match(/(\d+)\s*cached\s*Mem/)[1];
     parseCache(cachedMem);
+
+    parseOnline(users, count);
 
     setTimeout(function () {
       getSysInfo();
