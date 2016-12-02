@@ -35,14 +35,16 @@ app.use(async function (ctx, next) {
 const io = require('socket.io').listen(app.listen(3000));
 
 let count = 0;
-let cities = [];
+let cities = {};
 
 io.on('connection', function (socket) {
   const socketId = socket.id;
   const clientIp = socket.request.connection.remoteAddress.slice(-15);
+  let city;
   count++;
   getIp(clientIp).then(function (data) {
-    cities.push(data.geoIP);
+    cities[data.geoIP] = cities[data.geoIP] ? cities[data.geoIP] + 1 : 1;
+    city = data.geoIP;
   })
   // console.log(socketId);
   // console.log(clientIp);
@@ -71,5 +73,8 @@ io.on('connection', function (socket) {
 
   socket.on('disconnect', function () {
     count--;
+    if (city) {
+      cities[data.geoIP] = cities[data.geoIP] ? cities[data.geoIP] - 1 : 0;
+    }
   });
 });
