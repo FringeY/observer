@@ -3,12 +3,12 @@ const exec = require('child_process').exec;
 const redis = require('redis');
 const client = redis.createClient({detect_buffers: true});
 
-client.on("error", function (err) {
-    console.log("Error " + err);
+client.on('error', function (err) {
+    console.log('Error ' + err);
 });
 
 function getSysInfo() {
-  exec('top -bn 1 -d 1', (error, stdout, stderr) => {
+  exec('top -bn2 | awk "/^top -/ { p=!p } { if (!p) print }"', (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
       return;
@@ -18,7 +18,7 @@ function getSysInfo() {
 
   setTimeout(function () {
     getSysInfo();
-  }, 1000);
+  }, 5000);
 }
 
 getSysInfo();
