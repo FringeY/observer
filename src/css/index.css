@@ -93,3 +93,61 @@ body {
   width: 100%;
   height: 200px;
 }
+
+.query {
+  border: 1px solid #e3e3e3;
+  background-color: #FFFFFF;
+}
+
+.query h3 {
+  margin: 0;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 200;
+  color: #333;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.query div {
+  overflow: hidden;
+}
+
+.query input {
+  float: left;
+  margin: 0 12px;
+  width: 80%;
+  line-height: 2;
+  font-size: 14px;
+  outline: none;
+}
+
+.query .button {
+  float: left;
+  margin: 3px;
+  padding: 0 20px;
+  font-size: 14px;
+  line-height: 2;
+  cursor: pointer;
+  color: #fff;
+  background-color: #00B8A9;
+}
+
+.query .query-list {
+  border: none;
+}
+
+.query .query-list li {
+  overflow: hidden;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+.query .query-list li:nth-child(1) {
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.query .query-list div {
+  float: left;
+  width: 25%;
+}

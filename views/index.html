@@ -17,7 +17,7 @@
         <h3>CPU load average: <span id="loadaverage">1</span></h3>
       </li>
       <li>
-        <h3>CPU:<span>us(用户空间) sy(内核空间) ni(优先级修改) id(空闲) wa(IO) hi(硬中断) si(软中断) st(虚拟)</span></h3>
+        <h3>CPU:<span> us(用户空间) sy(内核空间) ni(优先级修改) id(空闲) wa(IO) hi(硬中断) si(软中断) st(虚拟)</span></h3>
         <div id="cpu-chart"></div>
       </li>
       <li>
@@ -42,6 +42,22 @@
       <ul id="online">
         
       </ul>
+      <div class="query">
+        <h3>问卷查询</h3>
+        <div>
+          <input type="text" name="" value="" placeholder="请输入姓名">
+          <div class="button" id="search">查询</div>
+        </div>
+        <ul class="query-list">
+          <li>
+            <div>姓名</div>
+            <div>学校</div>
+            <div>学号</div>
+            <div>问卷</div>
+          </li>
+          <li id="result"></li>
+        </ul>
+      </div>
     </div>
   </div>
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>

@@ -269,4 +269,21 @@ window.onload = function () {
   function getUsers() {
     socket.emit('getUsers', { my: 'data' });  
   }
+
+  // mock query
+  var data = {
+    '李三': ['重庆邮电大学', '2013211xxx', '关于xxx问卷'],
+    '张三': ['重庆大学', '2013211xxx', '关于xxx问卷'],
+    '小明': ['重庆邮电大学', '2013211xxx', '关于xxx问卷'],
+    '大白': ['重庆邮电大学', '2013211xxx', '关于xxx问卷'],
+    '小黑': ['重庆工商大学', '2013211xxx', '关于xxx问卷']
+  }
+
+  document.getElementById('search').addEventListener('click', function () {
+    var val = document.getElementsByTagName('input')[0].value;
+    var result = data[val];
+    if (result) {
+      document.getElementById('result').innerHTML = '<div>' + val + '</div>' + '<div>' + result[0] + '</div>' + '<div>' + result[1] + '</div>' + '<div>' + result[2] + '</div>';
+    }
+  });
 }
