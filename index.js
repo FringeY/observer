@@ -6,6 +6,7 @@ const serve = require('koa-static');
 const logger = require('koa-logger');
 const views = require('koa-views');
 const bluebird = require('bluebird');
+const send = require('koa-send');
 const getIp = require('./getIp');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 
