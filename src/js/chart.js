@@ -226,29 +226,30 @@ window.onload = function () {
     sysInfo = data.data;
     var users = data.users && JSON.parse(data.users);
     var count = data.count;
-    if (!sysInfo || !users || !count) {
-      return;
+    if (sysInfo) {
+      var time = sysInfo.match(/top\s*\-\s*(\d+\:\d+\:\d+)/)[1];
+      Times.push(time);
+      showTime(time);
+      var uptime = sysInfo.match(/up\s*(\d+\s*days,\s*\d+\:\d+)/).slice(1);
+      showUpTime(uptime);
+      var loadaverage = sysInfo.match(/load\s*average\:\s*(\d+\.\d+),\s*(\d+\.\d+),\s*(\d+\.\d+)/).slice(1);
+      showLoadAverage(loadaverage);
+      var tasks = sysInfo.match(/Tasks\:\s*(\d+)\s*total,\s*(\d+)\s*running,\s*(\d+)\s*sleeping,\s*(\d+)\s*stopped,\s*(\d+)\szombie/).slice(1)
+      showTasks(tasks);
+      var cpu = sysInfo.match(/Cpu\(s\):\s*(\d+\.\d+)\s*us,\s*(\d+\.\d+)\s*sy,\s*(\d+\.\d+)\s*ni,\s*(\d+\.\d+)\s*id,\s*(\d+\.\d+)\s*wa,\s*(\d+\.\d+)\s*hi,\s*(\d+\.\d+)\s*si,\s*(\d+\.\d+)\s*st/).slice(1);
+      parseCpu(cpu);
+      var mem = sysInfo.match(/KiB\s*Mem\:\s*(\d+)\s*total,\s*(\d+)\s*used,\s*(\d+)\s*free,\s*(\d+)\s*buffers/).slice(1);
+      parseMem(mem);
+      // var swap = sysInfo.match(/KiB\sSwap\:\s*(\d+)\stotal,\s*(\d+)\sused,\s*(\d+)\sfree/).slice(1);
+      // Swaps.push(swap);
+      cachedMem = sysInfo.match(/(\d+)\s*cached\s*Mem/)[1];
+      parseCache(cachedMem);
     }
-    var time = sysInfo.match(/top\s*\-\s*(\d+\:\d+\:\d+)/)[1];
-    Times.push(time);
-    showTime(time);
-    var uptime = sysInfo.match(/up\s*(\d+\s*days,\s*\d+\:\d+)/).slice(1);
-    showUpTime(uptime);
-    var loadaverage = sysInfo.match(/load\s*average\:\s*(\d+\.\d+),\s*(\d+\.\d+),\s*(\d+\.\d+)/).slice(1);
-    showLoadAverage(loadaverage);
-    var tasks = sysInfo.match(/Tasks\:\s*(\d+)\s*total,\s*(\d+)\s*running,\s*(\d+)\s*sleeping,\s*(\d+)\s*stopped,\s*(\d+)\szombie/).slice(1)
-    showTasks(tasks);
-    var cpu = sysInfo.match(/Cpu\(s\):\s*(\d+\.\d+)\s*us,\s*(\d+\.\d+)\s*sy,\s*(\d+\.\d+)\s*ni,\s*(\d+\.\d+)\s*id,\s*(\d+\.\d+)\s*wa,\s*(\d+\.\d+)\s*hi,\s*(\d+\.\d+)\s*si,\s*(\d+\.\d+)\s*st/).slice(1);
-    parseCpu(cpu);
-    var mem = sysInfo.match(/KiB\s*Mem\:\s*(\d+)\s*total,\s*(\d+)\s*used,\s*(\d+)\s*free,\s*(\d+)\s*buffers/).slice(1);
-    parseMem(mem);
-    // var swap = sysInfo.match(/KiB\sSwap\:\s*(\d+)\stotal,\s*(\d+)\sused,\s*(\d+)\sfree/).slice(1);
-    // Swaps.push(swap);
-    cachedMem = sysInfo.match(/(\d+)\s*cached\s*Mem/)[1];
-    parseCache(cachedMem);
 
-    parseOnline(users, count);
-
+    if (count || users) {
+      parseOnline(users, count);
+    }
+    
     setTimeout(function () {
       getSysInfo();
     }, 5000);
