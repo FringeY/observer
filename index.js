@@ -34,7 +34,7 @@ app.use(async function (ctx, next) {
   await ctx.render('index', {});
 });
 
-app.use(function *() {
+app.use(function *(ctx) {
   if (ctx.path == '/test.txt') {
     var fpath= path.join(__dirname + '/src/test.txt');      
     this.type = extname(fpath);
