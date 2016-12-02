@@ -32,6 +32,11 @@ app.use(async function (ctx, next) {
 const io = require('socket.io').listen(app.listen(3000));
 
 io.on('connection', function (socket) {
+  var socketId = socket.id;
+  var clientIp = socket.request.connection.remoteAddress;
+  console.log(socket);
+  console.log(socketId);
+  console.log(clientIp);
   client.get('sysinfo', function (err, reply) {
     if (err !== null) {
       console.log(err);
