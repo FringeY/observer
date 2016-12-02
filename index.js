@@ -33,7 +33,7 @@ app.use(async (ctx, next) => {
 app.use(async function (ctx, next) {
   console.log(ctx.path);
   if (ctx.path == '/test.txt') {
-    var filepath= path.join(__dirname + '/test.txt');    
+    var filepath= path.join(__dirname + '/src/test.txt');    
     this.set('Content-disposition','attachment;filename=test.txt');    
     fs.readFile(filepath, function(err, data){  
       if(err){  
