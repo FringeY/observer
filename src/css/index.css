@@ -27,6 +27,13 @@ body {
   background-color: #FFFFFF;
 }
 
+#online li {
+  padding: 4px 12px;
+  font-size: 12px;
+  color: #666;
+  border-top: 1px solid #e3e3e3;
+}
+
 .left ul li h3 {
   margin: 0;
   padding: 8px 12px;

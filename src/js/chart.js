@@ -211,10 +211,10 @@ window.onload = function () {
     document.getElementById('zombie').getElementsByTagName('span')[0].innerHTML = data[3];
   }
 
-  function parseOnline(users, cities) {
+  function parseOnline(count, cities) {
     var container = document.getElementById('online');
     var str = '';
-    str += '<li>在线人数: ' + users + '</li>'; 
+    str += '<li>在线人数: ' + count + '</li>'; 
     for (key in cities) {
       str += '<li>' + key + ':' + cities[key] + '人</li>';
     }
@@ -224,8 +224,6 @@ window.onload = function () {
   socket.on('sysInfo', function (data) {
     console.log(data);
     sysInfo = data.data;
-    var cities = data.cities && JSON.parse(data.cities);
-    var users = data.users;
     if (sysInfo) {
       var time = sysInfo.match(/top\s*\-\s*(\d+\:\d+\:\d+)/)[1];
       Times.push(time);
@@ -245,17 +243,30 @@ window.onload = function () {
       cachedMem = sysInfo.match(/(\d+)\s*cached\s*Mem/)[1];
       parseCache(cachedMem);
     }
-
-    if (users || cities) {
-      parseOnline(users, cities);
-    }
     
     setTimeout(function () {
       getSysInfo();
     }, 5000);
   });
 
+  socket.on('users', function (data) {
+    var cities = data.cities && JSON.parse(data.cities);
+    var count = data.count;
+
+    if (count || cities) {
+      parseOnline(count, cities);
+    }
+
+    setTimeout(function () {
+      getUsers();
+    }, 1000);
+  });
+
   function getSysInfo() {
     socket.emit('getSysInfo', { my: 'data' });    
+  }
+
+  function getUsers() {
+    socket.emit('getUsers', { my: 'data' });  
   }
 }

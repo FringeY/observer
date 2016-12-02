@@ -51,8 +51,10 @@ io.on('connection', function (socket) {
   
   client.getAsync('sysinfo').then(function (res) {
     socket.emit('sysInfo', { 
-      data: res.toString(),
-      users: count,
+      data: res.toString()
+    });
+    socket.emit('users', {
+      count: count,
       cities: JSON.stringify(cities)
     });
   });
@@ -63,13 +65,18 @@ io.on('connection', function (socket) {
         console.log(err);
       } else {
         socket.emit('sysInfo', {
-          data: reply.toString(),
-          users: count,
-          cities: JSON.stringify(cities)
+          data: reply.toString()
         });
       }
     });
   });
+
+  socket.on('getUsers', function (data) {
+    socket.emit('users', {
+      count: count,
+      cities: JSON.stringify(cities)
+    });
+  })
 
   socket.on('disconnect', function () {
     count--;
