@@ -31,18 +31,21 @@ app.use(async function (ctx, next) {
 
 const io = require('socket.io').listen(app.listen(3000));
 
+let count = 0;
+
 io.on('connection', function (socket) {
-  var socketId = socket.id;
-  var clientIp = socket.request.connection.remoteAddress;
+  const socketId = socket.id;
+  const clientIp = socket.request.connection.remoteAddress.slice(-15);
+  count++;
   console.log(socket);
   console.log(socketId);
   console.log(clientIp);
-  client.get('sysinfo', function (err, reply) {
-    if (err !== null) {
-      console.log(err);
-    } else {
-      socket.emit('sysInfo', { data: reply.toString() });
-    }
+  
+  client.getAsync('sysinfo').then(function (res) {
+    socket.emit('sysInfo', { 
+      data: res.toString(),
+      users: count
+    });
   });
   
   socket.on('getSysInfo', function (data) {
@@ -50,8 +53,15 @@ io.on('connection', function (socket) {
       if (err !== null) {
         console.log(err);
       } else {
-        socket.emit('sysInfo', { data: reply.toString() });
+        socket.emit('sysInfo', {
+          data: reply.toString(),
+          users: count
+        });
       }
     });
+  });
+
+  socket.on('disconnect', function () {
+    count--;
   });
 });
