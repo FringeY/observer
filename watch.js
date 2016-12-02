@@ -7,17 +7,18 @@ client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-const top = exec('top -bn 1', {});
+function getSysInfo() {
+  exec('top -bn 1 -d 1', (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return;
+    }
+    client.set('sysinfo', stdout);
+  });
 
-top.stdout.on('data', function (data) {
-  client.set('sysinfo', data);
-});
+  setTimeout(function () {
+    getSysInfo();
+  }, 1000);
+}
 
-top.stderr.on('data', function (data) {
-  console.log(data);
-})
-
-top.on('exit', function (code) {
-  client.quit();
-  console.log('child process exited with code ' + code);
-})
+getSysInfo();
