@@ -34,6 +34,11 @@ body {
   border-top: 1px solid #e3e3e3;
 }
 
+#online li:nth-child(1) {
+  font-size: 14px;
+  color: #333;
+}
+
 .left ul li h3 {
   margin: 0;
   padding: 8px 12px;
