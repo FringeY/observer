@@ -211,12 +211,12 @@ window.onload = function () {
     document.getElementById('zombie').getElementsByTagName('span')[0].innerHTML = data[3];
   }
 
-  function parseOnline(users, count) {
+  function parseOnline(users, cities) {
     var container = document.getElementById('online');
     var str = '';
-    str += '<li>在线人数: ' + count + '</li>'; 
-    for (key in users) {
-      str += '<li>' + key + ':' + users[key] + '人</li>';
+    str += '<li>在线人数: ' + users + '</li>'; 
+    for (key in cities) {
+      str += '<li>' + key + ':' + cities[key] + '人</li>';
     }
     container.innerHTML = str;
   }
@@ -224,8 +224,8 @@ window.onload = function () {
   socket.on('sysInfo', function (data) {
     console.log(data);
     sysInfo = data.data;
-    var users = data.users && JSON.parse(data.users);
-    var count = data.count;
+    var cities = data.cities && JSON.parse(data.cities);
+    var users = data.users;
     if (sysInfo) {
       var time = sysInfo.match(/top\s*\-\s*(\d+\:\d+\:\d+)/)[1];
       Times.push(time);
@@ -246,8 +246,8 @@ window.onload = function () {
       parseCache(cachedMem);
     }
 
-    if (count || users) {
-      parseOnline(users, count);
+    if (users || cities) {
+      parseOnline(users, cities);
     }
     
     setTimeout(function () {
