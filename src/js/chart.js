@@ -218,7 +218,7 @@ window.onload = function () {
     for (key in users) {
       str += '<li>' + key + ':' + users[key] + '人</li>';
     }
-    container.innerHTML = string;
+    container.innerHTML = str;
   }
 
   socket.on('sysInfo', function (data) {
