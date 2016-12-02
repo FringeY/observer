@@ -74,7 +74,7 @@ io.on('connection', function (socket) {
   socket.on('disconnect', function () {
     count--;
     if (city) {
-      cities[data.geoIP] = cities[data.geoIP] ? cities[data.geoIP] - 1 : 0;
+      cities[city] = cities[city] ? cities[city] - 1 : 0;
     }
   });
 });
