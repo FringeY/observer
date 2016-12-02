@@ -1,5 +1,6 @@
 const koa = require('koa');
 const app = new koa();
+const fs = require('fs');
 const redis = require('redis');
 const client = redis.createClient({detect_buffers: true});
 const serve = require('koa-static');
@@ -30,6 +31,17 @@ app.use(async (ctx, next) => {
 });
 
 app.use(async function (ctx, next) {
+  if (ctx.path == '/test.txt') {
+    var filepath= path.join(__dirname + '/test.txt');    
+    this.set('Content-disposition','attachment;filename='+filename);    
+    fs.readFile(filepath, function(err, data){  
+      if(err){  
+        console.log(err);  
+      } else {  
+        this.body = data;      
+      }  
+    });  
+  }
   await ctx.render('index', {});
 });
 
