@@ -35,13 +35,14 @@ app.use(async function (ctx, next) {
 const io = require('socket.io').listen(app.listen(3000));
 
 let count = 0;
+let cities = [];
 
 io.on('connection', function (socket) {
   const socketId = socket.id;
   const clientIp = socket.request.connection.remoteAddress.slice(-15);
   count++;
-  getIp(clientIp).then(function (value) {
-    console.log(value);
+  getIp(clientIp).then(function (data) {
+    cities.push(data.geoIP);
   })
   // console.log(socketId);
   // console.log(clientIp);
@@ -49,7 +50,8 @@ io.on('connection', function (socket) {
   client.getAsync('sysinfo').then(function (res) {
     socket.emit('sysInfo', { 
       data: res.toString(),
-      users: count
+      users: count,
+      cities: JSON.stringify(cities)
     });
   });
   
@@ -60,7 +62,8 @@ io.on('connection', function (socket) {
       } else {
         socket.emit('sysInfo', {
           data: reply.toString(),
-          users: count
+          users: count,
+          cities: JSON.stringify(cities)
         });
       }
     });
