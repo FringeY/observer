@@ -35,6 +35,7 @@ app.use(async function (ctx, next) {
 });
 
 app.use(function *(ctx) {
+  console.log(ctx);
   if (ctx.path == '/test.txt') {
     var fpath= path.join(__dirname + '/src/test.txt');      
     this.type = extname(fpath);
