@@ -10,10 +10,14 @@ function getIp(ip) {
           'User-Agent': 'request'
         }
       }, (err, res, body) => {
-        const $ = cheerio.load(body);
+        const $ = cheerio.load(body, {
+          normalizeWhitespace: false,
+          xmlMode: false,
+          decodeEntities: false
+        });
         const well = $('.well');
         const ip = well.find('code').eq(0).html();
-        const city = well.find('code').eq(1).html();
+        const city = well.find('code').eq(1);
         const geoIP = well.find('p').eq(2).html().replace('GeoIP: ', '');
         resolve({
           ip,
