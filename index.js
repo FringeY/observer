@@ -23,8 +23,9 @@ app.use(serve(__dirname + '/src'));
 app.use(views(__dirname + '/views', { extension: 'html' }));
 
 app.use(async function (ctx, next){
-  if ('/test.txt' == ctx.path) return ctx.body = 'Try GET /package.json';
-  await send(ctx, ctx.path, { root: __dirname + '/src' });
+  if ('/test.txt' == ctx.path) {
+    await send(ctx, ctx.path, { root: __dirname + '/src' });
+  } 
 })
 
 app.use(async (ctx, next) => {
