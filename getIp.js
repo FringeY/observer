@@ -17,7 +17,7 @@ function getIp(ip) {
         });
         const well = $('.well');
         const ip = well.find('code').eq(0).text();
-        const city = well.find('code').eq(1).text();
+        const city = well.find('p').eq(1).text().match(/[\u4e00-\u9fa5]*\s[\u4e00-\u9fa5]*/)[0];
         const geoIP = well.find('p').eq(2).text().replace('GeoIP: ', '');
         resolve({
           ip,
