@@ -12,9 +12,9 @@ function getIp(ip) {
       }, (err, res, body) => {
         const $ = cheerio.load(body);
         const well = $('.well');
-        const ip = well.find('code').eq(0).text();
-        const city = well.find('code').eq(1).text();
-        const geoIP = well.find('p').eq(2).text().replace('GeoIP: ', '');
+        const ip = well.find('code').eq(0).html();
+        const city = well.find('code').eq(1).html();
+        const geoIP = well.find('p').eq(2).html().replace('GeoIP: ', '');
         resolve({
           ip,
           city,
