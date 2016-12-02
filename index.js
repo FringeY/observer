@@ -5,6 +5,8 @@ const client = redis.createClient({detect_buffers: true});
 const serve = require('koa-static');
 const logger = require('koa-logger');
 const views = require('koa-views');
+const bluebird = require('bluebird');
+bluebird.promisifyAll(redis.RedisClient.prototype);
 
 // logger
 
