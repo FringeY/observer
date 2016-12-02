@@ -114,7 +114,7 @@ window.onload = function () {
       boundaryGap: false
     },
     yAxis: {
-      name: 'MiB',
+      name: 'KiB',
       type: 'value'
     },
     series: [
@@ -153,7 +153,7 @@ window.onload = function () {
       boundaryGap: false
     },
     yAxis: {
-      name: 'MiB',
+      name: 'KiB',
       type: 'value'
     },
     series: [
@@ -181,14 +181,14 @@ window.onload = function () {
   }
 
   function parseMem(data) {
-    used.push(data[1] * 1 / 1024);
-    free.push(data[2] * 1 / 1024);
-    buffers.push(data[3] * 1 / 1024);
+    used.push(data[1] * 1);
+    free.push(data[2] * 1);
+    buffers.push(data[3] * 1);
     memChart.setOption(memOption);
   }
 
   function parseCache(data) {
-    CachedMems.push(data * 1 / 1024);
+    CachedMems.push(data * 1);
     cacheChart.setOption(cacheOption);
   }
 
