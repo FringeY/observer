@@ -6,6 +6,7 @@ const serve = require('koa-static');
 const logger = require('koa-logger');
 const views = require('koa-views');
 const bluebird = require('bluebird');
+const getIp = require('./getIp');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 
 // logger
@@ -39,9 +40,11 @@ io.on('connection', function (socket) {
   const socketId = socket.id;
   const clientIp = socket.request.connection.remoteAddress.slice(-15);
   count++;
-  console.log(socket);
-  console.log(socketId);
-  console.log(clientIp);
+  getIp(clientIp).then(function (value) {
+    console.log(value);
+  })
+  // console.log(socketId);
+  // console.log(clientIp);
   
   client.getAsync('sysinfo').then(function (res) {
     socket.emit('sysInfo', { 
